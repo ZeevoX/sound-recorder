@@ -258,7 +258,7 @@ public class WavAudioRecorder {
         if (state == State.READY) {
             payloadSize = 0;
             audioRecorder.startRecording();
-            audioRecorder.read(buffer, 0, buffer.length);	//[TODO: is this necessary]read the existing data in audio hardware, but don't do anything
+            audioRecorder.read(buffer, 0, buffer.length);
             state = State.RECORDING;
         } else {
             Log.e(WavAudioRecorder.class.getName(), "start() called on illegal state");

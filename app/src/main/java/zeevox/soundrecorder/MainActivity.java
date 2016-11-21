@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,16 +12,17 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import java.io.IOException;
 import java.util.Calendar;
+
+import static android.media.MediaRecorder.AudioSource.MIC;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,12 +31,16 @@ public class MainActivity extends AppCompatActivity {
     public static final int PermissionsStorageW = 0;
     public MediaRecorder mRecorder = null;
     public boolean recordingBool = false;
-    private AlertDialog recordingSettingsDialog;
+    public final int audioSource = MIC;
+    public final int sampleRate = 0;
+    public final int channelConfig = 0;
+    public final int audioFormat = 0;
+    private MediaPlayer mPlayer = null;
 
     public void startRecording() {
         Calendar c = Calendar.getInstance();
         mRecorder = new MediaRecorder();
-        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setAudioSource(MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mRecorder.setOutputFile(Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + "/recording"+ c.get(Calendar.YEAR) + c.get(Calendar.MONTH) + c.get(Calendar.DAY_OF_MONTH) + c.get(Calendar.HOUR_OF_DAY) + c.get(Calendar.MINUTE) +  c.get(Calendar.SECOND) + ".mp3");
@@ -52,6 +58,30 @@ public class MainActivity extends AppCompatActivity {
     public void stopRecording() {
         mRecorder.stop();
         recordingBool=false;
+    }
+
+    private void onPlay(boolean start) {
+        if (start) {
+            startPlaying();
+        } else {
+            stopPlaying();
+        }
+    }
+
+    private void startPlaying() {
+        mPlayer = new MediaPlayer();
+        try {
+            //mPlayer.setDataSource(mFileName);
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            //Log.e(LOG_TAG, "prepare() failed");
+        }
+    }
+
+    private void stopPlaying() {
+        mPlayer.release();
+        mPlayer = null;
     }
 
     public void checkAndRequestPermissionsAudio() {
@@ -92,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
-        initializeDialogs();
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabRecord);
         fab.setImageDrawable(MainActivity.this.getResources().getDrawable(R.drawable.ic_mic_white_48dp));
@@ -119,26 +148,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*public AlertDialog RecordingSettings() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppTheme_PopupOverlay);
-        builder.setTitle(R.string.title_activity_settings);
-        View view = LayoutInflater.from(this).inflate(R.layout.content_popup_settings, null);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dropdown_rec_format_list, R.layout.content_popup_settings);
-        adapter.setDropDownViewResource(R.layout.content_popup_settings);
-        Spinner settingsDropdownBitrate = (Spinner) view.findViewById(R.id.dropdown_rec_bitrate);
-        settingsDropdownBitrate.setAdapter(adapter);
-        adapter = ArrayAdapter.createFromResource(this, R.array.dropdown_rec_format_list, R.layout.content_popup_settings);
-        adapter.setDropDownViewResource(R.layout.content_popup_settings);
-        Spinner settingsDropdownFormat = (Spinner) view.findViewById(R.id.dropdown_rec_format);
-        settingsDropdownFormat.setAdapter(adapter);
-        builder.setNegativeButton(R.string.recording_settings_close, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        return builder.create();
-    }*/
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,9 +166,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void initializeDialogs() {
-        //this.recordingSettingsDialog = RecordingSettings();
     }
 }

@@ -19,10 +19,7 @@ This application is not yet available on Google Play. Please use the [other inst
 ## <a name="oio"></a>Other Install Options
 
 Download latest stable version apk: [app-release.apk](/apk/app-release.apk)<br>
-Download latest beta version apk: [app-beta.apk](/apk/app-beta.apk)
-<!--Download latest alpha version: [app-alpha.apk](/apk/app-alpha.apk)
-Download latest dogfood version: [app-dogfood.apk](/apk/app-dogfood.apk)-->
-<br>
+Download latest beta version apk: [app-beta.apk](/apk/app-beta.apk)<br>
 Download legacy version apks: [/apkarchive](/apkarchive)
 
 ## Screenshots

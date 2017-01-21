@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeInfo" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorAccent">@color/colorInfoAccent</item>
+        <item name="colorPrimaryDark">@color/colorInfoPrimaryDark</item>
+        <item name="android:colorBackground">@color/colorInfoBackground</item>
+        <item name="android:navigationBarColor">@color/colorInfoPrimaryDark</item>
+        <item name="android:statusBarColor">@color/colorInfoPrimaryDark</item>
+        <item name="colorPrimary">@color/colorInfoToolbar</item>
+    </style>
+
+    <style name="AppThemeSplash" parent="Theme.AppCompat.NoActionBar" >
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorAccentDarkDark</item>
+        <item name="android:navigationBarColor">@color/colorAccentDarkDark</item>
+        <item name="android:colorBackground">@color/colorAccentDark</item>
+    </style>
+
+</resources>

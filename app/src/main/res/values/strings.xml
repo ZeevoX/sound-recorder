@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_launcher_name">Recorder</string>
+    <string name="app_name">Sound Recorder</string>
+    <string name="app_version_title">App version</string>
+    <string name="app_build_title">App build number</string>
+    <string name="app_copyright_title">License</string>
+    <string name="app_copyright">Copyright &#169; 2016 &#8211; 2017 Timothy Langer (ZeevoX). Tap to learn more&#8230;</string>
+    <string name="app_release_type_title">Application release type</string>
+    <string name="app_release_type_stable">Stable</string>
+    <string name="app_release_type_debug">Debug</string>
+    <string name="app_release_type_beta">Beta</string>
+    <string name="app_release_type_dogfood">Dogfood (Internal)</string>
+
+    <string name="dogfood_info_title">Shh&#8230; confidential</string>
+    <string name="dogfood_info_message">This app can only be shared with approved testers.</string>
+
+    <string name="beta_info_title">This is a beta release&#8230;</string>
+    <string name="beta_info_message">This app release may contain bugs, and some features may be unstable.</string>
+
+    <string name="dialog_info_title">An error occurred&#8230;</string>
+    <string name="dialog_info_content">You seem to have accessed a internal menu on a public version of Sound Recorder. Return to the home screen?</string>
+    <string name="dialog_info_choose_title">Advanced Settings menu</string>
+    <string name="dialog_info_choose_content">Are you sure you want to continue? Select the experimental view you want to access.</string>
+    <string name="dialog_info_choose_positive">Beta</string>
+    <string name="dialog_info_choose_neutral">Return home</string>
+    <string name="dialog_info_choose_negative">Dogfood</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_ok">OK</string>
+    <string name="action_save">Save</string>
+    <string name="action_no_thanks">No thanks</string>
+    <string name="action_dont_ask_again">Don\'t ask me again</string>
+    <string name="action_dismiss">Dismiss</string>
+    <string name="action_try_again">Try again</string>
+    <string name="action_yeah_sure">Yeah, sure!</string>
+    <string name="action_close">Close</string>
+    <string name="action_close_and_save">Close and save</string>
+    <string name="action_got_it">Got it</string>
+    <string name="action_yes">Yes</string>
+
+    <string name="info_error">Error occurred&#8230;</string>
+
+    <string name="dialog_rename_file_title">Name your recording</string>
+    <string name="dialog_rename_file_content">Give a name for your recording. You can always change this later.</string>
+    <string name="dialog_rename_file_hint">Enter a filename&#8230;</string>
+    <string name="dialog_rename_file_prefill">SoundRecording</string>
+    <string name="dialog_error_recording_title">Could not record</string>
+    <string name="dialog_error_recording_content">Recorder by EZ Code could not record. This is most probably because you denied the permissions required to make recordings.</string>
+    <string name="dialog_join_beta_title">Join the beta</string>
+    <string name="dialog_join_beta_content">Help out the developers behind Sound Recorder by being the first to test new features and identify issues. These releases may contain bugs, but it allows for development of the application to continue at a faster pace.</string>
+    <string name="dialog_permissions_record_content">Sound Recorder by EZ Code needs permission to use your microphone and permission to save files on your device to continue. Please allow these permissions.</string>
+    <string name="dialog_permissions_storage_content">Sound Recorder by EZ Code needs permission to save recordings to your device to continue. Please allow this permission.</string>
+    <string name="dialog_progress_clear_cache">Deleting temporary files&#8230;</string>
+    <string name="dialog_progress_clear_cache_please_wait">Working magic, please wait&#8230;</string>
+    <string name="dialog_clear_cache_error_title">An error occurred</string>
+    <string name="dialog_clear_cache_error_text">There was a problem in the code and we couldn\'t clear the cache. Try again?</string>
+
+    <string name="tutorial_fabrecord_title">Record any sound</string>
+    <string name="tutorial_fabrecord_subtext">Tap the microphone button to start recording</string>
+    <string name="tutorial_settings_cog_title">Change recording settings</string>
+    <string name="tutorial_settings_cog_subtext">Tap the settings icon to change the quality of recordings and more.</string>
+
+    <string name="settings_title">Recording Settings</string>
+    <string name="settings_switch_high_quality_title">Enable high quality recording</string>
+    <string name="settings_switch_high_quality_summary">If enabled, recordings will take up more space on your device, but will sound clearer on playback.</string>
+    <string name="settings_category_notifications">Notifications</string>
+    <string name="settings_switch_persistent_notification_title">Show a notification when recording</string>
+    <string name="settings_switch_persistent_notification_summary">When recording, display a notification with \"pause\" and \"stop\" actions for easy access.</string>
+    <string name="settings_category_miscellaneous">Miscellaneous</string>
+    <string name="settings_beta_summary_beta">You are already enrolled in the beta programme, no need.</string>
+    <string name="settings_beta_summary_dogfood">You are already enrolled in the internal dogfood programme, no need.</string>
+    <string name="settings_beta_summary_debug">You are a developer of this application, no need.</string>
+    <string name="settings_clear_cache_title">Delete temporary files</string>
+    <string name="settings_clear_cache_summary">Delete all of Sound Recorder\'s temporary files to free up space on your phone and speed it up.</string>
+
+    <string name="overflow_prompt_title">More actions</string>
+    <string name="overflow_prompt_description">Tap the 3 vertical dots to see more options</string>
+
+    <string name="menu_help">Help and FAQ</string>
+    <string name="menu_about">About Recorder</string>
+    <string name="menu_settings">Recording Settings</string>
+    <string name="menu_beta">Try new features&#8230;</string>
+    <string name="menu_feedback">Give feedback</string>
+    <string name="title_activity_help">Help and FAQ</string>
+
+    <string name="help_permissions_title">What are the permissions needed for?</string>
+    <string name="help_permissions">Sound Recorder needs access to your storage, media and files in order to be able to store the recordings on your device. The \'record audio\' permissions is required to capture audio from your microphone to record sound. Although Sound Recorder has access to sensitive data on your device, EZ Code will never share this data with other companies or even EZ Code employees.</string>
+    <string name="help_give_feedback_title">How do I leave feedback for this application?</string>
+    <string name="help_give_feedback">From the main window, press the overflow button, which looks like 3 dots stacked vertically, in the top right corner. Then press \'Give feedback\'. Enter your issue and any other additional information and tap \'send\'</string>
+
+    <string name="intro_welcome_title">Welcome to Recorder</string>
+    <string name="intro_welcome_description">Welcome to Recorder, a simple, intuitive and fluid application for recording all the sounds around you.</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

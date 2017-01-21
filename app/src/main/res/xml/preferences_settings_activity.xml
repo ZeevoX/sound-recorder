@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings_title">
+        <SwitchPreference
+        android:title="@string/settings_switch_high_quality_title"
+        android:summary="@string/settings_switch_high_quality_summary"
+        android:key="key_preference_switch_high_quality" />
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory android:title="@string/settings_category_notifications">
+        <SwitchPreference
+        android:title="@string/settings_switch_persistent_notification_title"
+        android:summary="@string/settings_switch_persistent_notification_summary"
+        android:key="key_preference_switch_persistent_notification" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_category_miscellaneous">
+        <Preference
+            android:key="key_app_version"
+            android:title="@string/app_version_title"
+            android:summary="@string/info_error" />
+        <Preference
+            android:key="key_app_build"
+            android:title="@string/app_build_title"
+            android:summary="@string/info_error" />
+        <Preference
+            android:key="key_app_release_type"
+            android:title="@string/app_release_type_title"
+            android:summary="@string/info_error"/>
+        <Preference
+            android:key="key_app_copyright"
+            android:title="@string/app_copyright_title"
+            android:summary="@string/app_copyright" />
+
+        <Preference
+            android:key="key_clear_cache"
+            android:title="@string/settings_clear_cache_title"
+            android:summary="@string/settings_clear_cache_summary" />
+        <Preference
+            android:key="key_join_beta"
+            android:title="@string/menu_beta" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,3 +1,5 @@
+![Sound Recorder Icon](https://github.com/ZeevoX/sound-recorder/raw/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+
 # Sound Recorder by ZeevoX
 
 #### Have you seen all those Sound Recorder applications on Google Play that are full of malware and advertisements?
@@ -15,6 +17,13 @@ This application is not yet available on Google Play. Please use the [other inst
 ###### Beta releases:
 
 [![Google Play](https://play.google.com/intl/en_gb/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=com.zeevox.recorder)-->
+
+## Screenshots
+
+| Splash Screen | Tutorial | Settings|
+|:-:|:-:|:-:|
+|<img alt="Screenshot of SplashScreen in SplashScreenActivity.java"src="https://raw.githubusercontent.com/ZeevoX/sound-recorder/master/screenshots/SplashScreenActivity.png"></img>|<img alt="Screenshot of Tutorial in MainActivity.java"src="https://raw.githubusercontent.com/ZeevoX/sound-recorder/master/screenshots/MainActivityTutorial.png"></img>|<img alt="Screenshot of Settings features in SettingsActivity.java"src="https://raw.githubusercontent.com/ZeevoX/sound-recorder/master/screenshots/SettingsActivity.png"></img>|
+| Screenshot of SplashScreen in [SplashScreenActivity.java](https://github.com/ZeevoX/sound-recorder/blob/master/app/src/main/java/com/zeevox/recorder/SplashScreenActivity.java) | Screenshot of Tutorial in [MainActivity.java](https://github.com/ZeevoX/sound-recorder/blob/master/app/src/main/java/com/zeevox/recorder/MainActivity.java#L87) | Screenshot of Settings features in [SettingsActivity.java](https://github.com/ZeevoX/sound-recorder/blob/master/app/src/main/java/com/zeevox/recorder/SettingsActivity.java)
 
 ## <a name="otherinstalloptions"></a>Other Install Options
 
@@ -40,7 +49,3 @@ This application is not yet available on Google Play. Please use the [other inst
 You can download old EAZY Code versions from [here.](https://github.com/ZeevoX/sound-recorder/tree/master/apk)
 
 Please do report any bugs you find on [the issues page.](https://github.com/ZeevoX/sound-recorder/issues)
-
-## Screenshots
-
-Screenshots are not yet available. Please stay tuned.

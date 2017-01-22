@@ -6,7 +6,7 @@ Sound Recorder by ZeevoX is a simple and smooth application that applies all of 
 
 ## Install
 
-This application is not yet available on Google Play. Please use the [other install options.](#oio)
+This application is not yet available on Google Play. Please use the [other install options.](#otherinstalloptions)
 
 <!--##### Stable releases:
 
@@ -16,11 +16,28 @@ This application is not yet available on Google Play. Please use the [other inst
 
 [![Google Play](https://play.google.com/intl/en_gb/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=com.zeevox.recorder)-->
 
-## <a name="oio"></a>Other Install Options
+## <a name="otherinstalloptions"></a>Other Install Options
 
-Download latest stable version apk / source code: [NOT AVAILABLE]()<br>
-Download latest beta version apk / source code: [v2.3-beta](https://github.com/ZeevoX/sound-recorder/releases/tag/v2.3-beta)<br>
-Download legacy version apks: [/apkarchive](/apkarchive)
+1. Download the APK or source code from the [releases page.](https://github.com/ZeevoX/sound-recorder/releases)
+2. Perform one of the following:
+   - Copy the APK file to the phone and run it
+   - Use ADB and run the following command from the folder where:<br>
+      On Mac or Linux:<br>
+      `cp apk-name.apk \SDK_LOCATION\platform-tools\`<br>
+      `cd \SDK_LOCATION\platform-tools\`<br>
+      `./adb install apk-name.apk`<br>
+      On Windows<br>
+         `copy apk-name.apk \SDK_LOCATION\platform-tools\apk-name.apk`<br>
+         `cd \SDK_LOCATION\platform-tools\`<br>
+         `adb install apk-name.apk`<br>
+   - Build manually from source code by running the following command:<br>
+      On Mac or Linux:<br>
+      `./adb install apk-name.apk`<br>
+      On Windows<br>
+      `adb install apk-name.apk`<br>
+3. Enjoy Sound Recorder
+
+Please do report any bugs you find on [the issues page.](https://github.com/ZeevoX/sound-recorder/issues)
 
 ## Screenshots
 

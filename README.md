@@ -18,8 +18,8 @@ This application is not yet available on Google Play. Please use the [other inst
 
 ## <a name="oio"></a>Other Install Options
 
-Download latest stable version apk: [app-release.apk](/apk/app-release.apk)<br>
-Download latest beta version apk: [app-beta.apk](/apk/app-beta.apk)<br>
+Download latest stable version apk / source code: [NOT AVAILABLE]()<br>
+Download latest beta version apk / source code: [v2.3-beta](https://github.com/ZeevoX/sound-recorder/releases/tag/v2.3-beta)<br>
 Download legacy version apks: [/apkarchive](/apkarchive)
 
 ## Screenshots

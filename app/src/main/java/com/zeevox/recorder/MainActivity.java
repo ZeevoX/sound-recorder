@@ -1,10 +1,7 @@
 package com.zeevox.recorder;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.media.MediaRecorder;
@@ -14,11 +11,8 @@ import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ActionMenuView;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,10 +21,13 @@ import android.widget.EditText;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import com.zeevox.recorder.encoders.*;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -37,6 +37,8 @@ This application is not yet available on Google Play. Please use the [other inst
       `adb install apk-name.apk`<br>
 3. Enjoy Sound Recorder
 
+You can download old EAZY Code versions from [here.](https://github.com/ZeevoX/sound-recorder/tree/master/apk)
+
 Please do report any bugs you find on [the issues page.](https://github.com/ZeevoX/sound-recorder/issues)
 
 ## Screenshots

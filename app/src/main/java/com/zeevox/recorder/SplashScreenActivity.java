@@ -12,11 +12,8 @@ public class SplashScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        int SPLASH_TIME_OUT = 500;
+        int SPLASH_TIME_OUT = 700;
         new Handler().postDelayed(() -> {
-            // This method will be executed once the timer is over
-            // Start your app main activity
-
             if (BuildConfig.BUILD_TYPE.contentEquals("beta") ||  BuildConfig.BUILD_TYPE.contentEquals("dogfood")) {
                 Intent infoIntent = new Intent(SplashScreenActivity.this, InfoActivity.class);
                 startActivity(infoIntent);

@@ -17,6 +17,9 @@
     <string name="beta_info_title">This is a beta release&#8230;</string>
     <string name="beta_info_message">This app release may contain bugs, and some features may be unstable.</string>
 
+    <string name="intro_1_title">Welcome to Sound Recorder!</string>
+    <string name="intro_1_description">Record all the sounds around you with one tap, be it an interview or your instrument playing.</string>
+
     <string name="dialog_info_title">An error occurred&#8230;</string>
     <string name="dialog_info_content">You seem to have accessed a internal menu on a public version of Sound Recorder. Return to the home screen?</string>
     <string name="dialog_info_choose_title">Advanced Settings menu</string>

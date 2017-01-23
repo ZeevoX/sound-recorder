@@ -14,10 +14,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -27,6 +30,8 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
+import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 import com.zeevox.recorder.encoders.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,21 +45,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.floatingActionButtonRecord);
-        fabRecord.setImageResource(R.drawable.mic_white);
-        fabRecord.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}}, new int[]{getResources().getColor(R.color.colorAccent)}));
+        FABToolbarLayout layout = (FABToolbarLayout) findViewById(R.id.fabtoolbar);
+        FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.fabtoolbar_fab);
+        tutorialFAB();
+        ImageView one = (ImageView) findViewById(R.id.one);
+        one.setOnClickListener(view -> layout.hide());
+        ImageView two = (ImageView) findViewById(R.id.two);
+        two.setOnClickListener(view -> layout.hide());
+        ImageView three = (ImageView) findViewById(R.id.three);
+        three.setOnClickListener(view -> {
+            stopRecording();
+            layout.hide();
+        });
         fabRecord.setOnClickListener(view -> {
-            if (!recordingState) {
-                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED) {
-                    startRecording();
-                } else {
-                    permissionsCheckRecording();
-                }
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED) {
+                startRecording();
+                layout.show();
             } else {
-                stopRecording();
+                permissionsCheckRecording();
             }
         });
-        tutorialFAB();
     }
 
     @Override
@@ -87,8 +97,10 @@ public class MainActivity extends AppCompatActivity {
     public void tutorialFAB() {
 
         new MaterialTapTargetPrompt.Builder(MainActivity.this, R.style.AppTheme)
-                .setTarget(findViewById(R.id.floatingActionButtonRecord))
+                .setTarget(findViewById(R.id.fabtoolbar_fab))
+                //.setTarget(findViewById(R.id.floatingActionButtonRecord))
                 .setPrimaryText(R.string.tutorial_fabrecord_title)
+                .setBackgroundColourFromRes(R.color.colorAccentDarkDark)
                 .setSecondaryText(R.string.tutorial_fabrecord_subtext)
                 .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
                     @Override
@@ -105,9 +117,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startRecording() {
-        FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.floatingActionButtonRecord);
-        fabRecord.setImageResource(R.drawable.stop_white);
-        fabRecord.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}}, new int[]{getResources().getColor(R.color.colorAccentDark)}));
+        //FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.floatingActionButtonRecord);
+        FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.fabtoolbar_fab);
         recordingState = true;
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -131,9 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void stopRecording() {
         mRecorder.stop();
-        FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.floatingActionButtonRecord);
-        fabRecord.setImageResource(R.drawable.mic_white);
-        fabRecord.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}}, new int[]{getResources().getColor(R.color.colorAccent)}));
+        FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.fabtoolbar_fab);
         recordingState=false;
         dialogRename();
         //renameDialog();
@@ -203,8 +212,8 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void dialogRename() {
 
+    public void dialogRename() {
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH) + 1;
@@ -212,47 +221,46 @@ public class MainActivity extends AppCompatActivity {
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
         int second = c.get(Calendar.SECOND);
-
         final String fileNameDefault = "SoundRecording " + year + "" + month + "" + day + " " + hour + "" + minute + "" + second;
-
+        final String[] name = {""};
         new MaterialDialog.Builder(this)
                 .title(R.string.dialog_rename_file_title)
                 .content(R.string.dialog_rename_file_content)
                 .alwaysCallInputCallback()
                 .inputRangeRes(1, 60, R.color.colorAccent)
                 .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME | InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-                .positiveText(R.string.action_save)
-                .canceledOnTouchOutside(false)
-                .onPositive((dialog, which) -> {
-                    //CREATES THE RECORDINGS DIRECTORY
-                    File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings");
-                    directory.mkdirs();
-
-                    //RENAMES THE TEMP FILE
-                    File temp = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
-                    File dest = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings" + File.separator, dialog.getInputEditText() + ".3gpp");
-                    temp.renameTo(dest);
-                })
-                .negativeText(R.string.action_delete)
-                .onNegative((dialog, which) -> {
-
-                    //DELETES THE TEMP FILE
-                    File file = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
-                    boolean deleted = file.delete();
-                })
-                .input(R.string.dialog_rename_file_hint, R.string.dialog_rename_file_prefill, false, (dialog, input) -> {
+                .input("Filename", "", (dialog, input) -> {
                     //PREVENT NULL FILENAME
                     if (input.toString().isEmpty()){
                         dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
                     } else {
                         dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
                     }
-
                     if (input.length()>60) {
                         dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
                     } else {
                         dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
                     }
+                    name[0] = input.toString();
+                })
+                .positiveText(R.string.action_save)
+                .canceledOnTouchOutside(false)
+                .onPositive((dialog, which) -> {
+                    Log.d("Dialog", "positive");
+                    File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings");
+                    directory.mkdirs();
+                    String userInput = name[0];
+                    Log.d("File", userInput);
+                    File temp = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
+                    File dest = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings" + File.separator, userInput + ".3gpp");
+                    temp.renameTo(dest);
+                })
+                .negativeText(R.string.action_delete)
+                .onNegative((dialog, which) -> {
+                    Log.d("Dialog", "negative");
+                    //DELETES THE TEMP FILE
+                    File file = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
+                    boolean deleted = file.delete();
                 })
                 .show();
     }

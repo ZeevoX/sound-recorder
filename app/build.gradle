@@ -7,8 +7,8 @@ android {
         applicationId "com.zeevox.recorder"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 13
-        versionName '2.4.1'
+        versionCode 14
+        versionName '2.4.2'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -45,5 +45,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.1.0'
     compile 'uk.co.samuelwall:material-tap-target-prompt:1.7.0'
     compile 'com.github.fafaldo:fab-toolbar:1.2.0'
+    compile 'com.heinrichreimersoftware:material-intro:1.6'
     androidTestCompile 'junit:junit:4.12'
 }

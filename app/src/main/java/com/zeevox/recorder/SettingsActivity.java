@@ -113,8 +113,8 @@ public class SettingsActivity extends PreferenceActivity {
                                 } else if (buildPress >= 7) {
                                     buildPress = 0;
                                     Toast.makeText(SettingsActivity.this, "Advanced settings are now enabled. Enjoy!", Toast.LENGTH_SHORT).show();
-                                    Intent infoActivityIntent = new Intent(SettingsActivity.this, InfoActivity.class);
-                                    startActivity(infoActivityIntent);
+                                    Intent introIntent = new Intent(SettingsActivity.this, IntroActivity.class);
+                                    startActivity(introIntent);
                                 }
                                 break;
                         }

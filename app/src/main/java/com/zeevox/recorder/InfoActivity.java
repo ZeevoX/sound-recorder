@@ -25,8 +25,11 @@ public class InfoActivity extends Activity {
                 setContentView(R.layout.activity_info_beta);
                 fabSetup();
                 break;
-            default:
+            case "debug":
                 dialogError();
+                break;
+            default:
+                returnToMain();
                 break;
         }
     }

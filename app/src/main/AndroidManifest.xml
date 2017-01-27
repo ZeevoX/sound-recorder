@@ -40,6 +40,8 @@
         <activity
             android:name=".InfoActivity"
             android:theme="@style/AppThemeInfo" />
+        <activity android:name=".IntroActivity"
+            android:theme="@style/Theme.Intro"/>
     </application>
 
 </manifest>

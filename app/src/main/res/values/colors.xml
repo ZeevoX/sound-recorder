@@ -21,6 +21,15 @@
     <color name="colorInfoPrimaryDark">#161e21</color>
     <color name="colorInfoToolbar">#fbfbfb</color>
 
+    <color name="colorIntroResponsiveBackground">#2196F3</color>
+    <color name="colorIntroResponsiveBackgroundDark">#1565C0</color>
+    <color name="colorIntroPersonalizeBackground">#4ba000</color>
+    <color name="colorIntroPersonalizeBackgroundDark">#268100</color>
+    <color name="colorIntroStorageBackground">#FF9800</color>
+    <color name="colorIntroStorageBackgroundDark">#F57C00</color>
+    <color name="colorIntroAudioBackground">#9C27B0</color>
+    <color name="colorIntroAudioBackgroundDark">#7B1FA2</color>
+
     <color name="black_overlay">#66000000</color>
     <color name="colorWhite">#ffffff</color>
 </resources>

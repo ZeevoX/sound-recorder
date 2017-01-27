@@ -17,9 +17,6 @@
     <string name="beta_info_title">This is a beta release&#8230;</string>
     <string name="beta_info_message">This app release may contain bugs, and some features may be unstable.</string>
 
-    <string name="intro_1_title">Welcome to Sound Recorder!</string>
-    <string name="intro_1_description">Record all the sounds around you with one tap, be it an interview or your instrument playing.</string>
-
     <string name="dialog_info_title">An error occurred&#8230;</string>
     <string name="dialog_info_content">You seem to have accessed a internal menu on a public version of Sound Recorder. Return to the home screen?</string>
     <string name="dialog_info_choose_title">Advanced Settings menu</string>
@@ -42,6 +39,7 @@
     <string name="action_close_and_save">Close and save</string>
     <string name="action_got_it">Got it</string>
     <string name="action_yes">Yes</string>
+    <string name="action_get_started">Get started</string>
 
     <string name="info_error">Error occurred&#8230;</string>
 
@@ -50,18 +48,18 @@
     <string name="dialog_rename_file_hint">Enter a filename&#8230;</string>
     <string name="dialog_rename_file_prefill">SoundRecording</string>
     <string name="dialog_error_recording_title">Could not record</string>
-    <string name="dialog_error_recording_content">Recorder by EZ Code could not record. This is most probably because you denied the permissions required to make recordings.</string>
+    <string name="dialog_error_recording_content">Recorder could not record. This is most probably because you denied the permissions required to make recordings.</string>
     <string name="dialog_join_beta_title">Join the beta</string>
     <string name="dialog_join_beta_content">Help out the developers behind Sound Recorder by being the first to test new features and identify issues. These releases may contain bugs, but it allows for development of the application to continue at a faster pace.</string>
-    <string name="dialog_permissions_record_content">Sound Recorder by EZ Code needs permission to use your microphone and permission to save files on your device to continue. Please allow these permissions.</string>
-    <string name="dialog_permissions_storage_content">Sound Recorder by EZ Code needs permission to save recordings to your device to continue. Please allow this permission.</string>
+    <string name="dialog_permissions_record_content">Recorder needs permission to use your microphone and permission to save files on your device to continue. Please allow these permissions.</string>
+    <string name="dialog_permissions_storage_content">Recorder needs permission to save recordings to your device to continue. Please allow this permission.</string>
     <string name="dialog_progress_clear_cache">Deleting temporary files&#8230;</string>
     <string name="dialog_progress_clear_cache_please_wait">Working magic, please wait&#8230;</string>
     <string name="dialog_clear_cache_error_title">An error occurred</string>
     <string name="dialog_clear_cache_error_text">There was a problem in the code and we couldn\'t clear the cache. Try again?</string>
 
-    <string name="tutorial_fabrecord_title">Record any sound</string>
-    <string name="tutorial_fabrecord_subtext">Tap the microphone button to start recording</string>
+    <string name="tutorial_fabrecord_title">Start recording!</string>
+    <string name="tutorial_fabrecord_subtext">Tap the microphone button to record anything you wish&#8230;</string>
     <string name="tutorial_settings_cog_title">Change recording settings</string>
     <string name="tutorial_settings_cog_subtext">Tap the settings icon to change the quality of recordings and more.</string>
 
@@ -108,4 +106,12 @@
 
     <string name="intro_welcome_title">Welcome to Recorder</string>
     <string name="intro_welcome_description">Welcome to Recorder, a simple, intuitive and fluid application for recording all the sounds around you.</string>
+    <string name="intro_responsive_title">Responsive</string>
+    <string name="intro_responsive_description">Using an app should never feel like a chore, so we designed Recorder to be as smooth and hassle-free as possible.</string>
+    <string name="intro_personalize_title">Personalize</string>
+    <string name="intro_personalize_description">An app should never look boring. In Recorder, you can express your mood and change the app theme to your liking.</string>
+    <string name="intro_permission_storage_title">Storage Permission</string>
+    <string name="intro_permission_storage_description">Recorder needs the storage permission to save files to your device.</string>
+    <string name="intro_permission_record_audio_title">Record Audio Permission</string>
+    <string name="intro_permission_record_audio_description">Recorder needs the record audio permission to use the microphone on your smartphone.</string>
 </resources>

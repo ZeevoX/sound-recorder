@@ -3,7 +3,6 @@ package com.zeevox.recorder;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
@@ -20,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -33,13 +30,10 @@ import java.util.Calendar;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
-import com.zeevox.recorder.encoders.*;
-
 public class MainActivity extends AppCompatActivity {
 
     public boolean recordingState = false;
     private MediaRecorder mRecorder = null;
-    public int recordSession = 0;
     public static final int REQUEST_MULTIPLE_PERMISSIONS_ID = 456;
 
     @Override
@@ -119,9 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
         new MaterialTapTargetPrompt.Builder(MainActivity.this, R.style.AppTheme)
                 .setTarget(findViewById(R.id.fabtoolbar_fab))
-                //.setTarget(findViewById(R.id.floatingActionButtonRecord))
                 .setPrimaryText(R.string.tutorial_fabrecord_title)
-                .setBackgroundColourFromRes(R.color.colorAccentDarkDark)
+                .setBackgroundColourFromRes(R.color.colorAccent)
                 .setSecondaryText(R.string.tutorial_fabrecord_subtext)
                 .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
                     @Override
@@ -138,8 +131,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startRecording() {
-        //FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.floatingActionButtonRecord);
-        FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.fabtoolbar_fab);
         recordingState = true;
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -163,10 +154,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void stopRecording() {
         mRecorder.stop();
-        FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.fabtoolbar_fab);
         recordingState=false;
         dialogRename();
-        //renameDialog();
     }
 
     public void permissionsCheckRecording() {
@@ -207,53 +196,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void permissionsRequestRecording() {
         ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_MULTIPLE_PERMISSIONS_ID);
-    }
-
-    public void dialogBeta() {
-
-        new MaterialDialog.Builder(this)
-                .title(R.string.dialog_join_beta_title)
-                .content(R.string.dialog_join_beta_content)
-                .iconRes(R.drawable.bug)
-                .checkBoxPromptRes(R.string.action_dont_ask_again, false, null)
-                .negativeText(R.string.action_no_thanks)
-                .positiveText(R.string.action_ok)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ezcode.recorder"));
-                        startActivity(intent);
-                    }
-                })
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-    }
-
-    public void dialogErrorRecording() {
-
-        new MaterialDialog.Builder(this)
-                .title(R.string.dialog_error_recording_title)
-                .content(R.string.dialog_error_recording_content)
-                .negativeText(R.string.action_dismiss)
-                .positiveText(R.string.action_try_again)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        permissionsCheckRecording();
-                    }
-                })
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
     }
 
 

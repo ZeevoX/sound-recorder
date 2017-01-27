@@ -7,13 +7,9 @@ android {
         applicationId "com.zeevox.recorder"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 11
-        versionName '2.4'
+        versionCode 13
+        versionName '2.4.1'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        jackOptions {
-            enabled true
-        }
     }
     buildTypes {
         release {
@@ -36,11 +32,6 @@ android {
         }
     }
     productFlavors {
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

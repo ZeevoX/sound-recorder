@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/action_settings">
 
     <PreferenceCategory android:title="@string/settings_title">
         <SwitchPreference
@@ -17,7 +17,19 @@
         android:key="key_preference_switch_persistent_notification" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/settings_category_theme">
+        <ListPreference
+            android:defaultValue="2"
+            android:key="key_preference_list_app_theme"
+            android:title="@string/settings_list_theme_title"
+            android:summary="@string/settings_list_theme_summary"
+            android:entryValues="@array/settings_list_theme_array_values"
+            android:entries="@array/settings_list_theme_array_names"
+            android:dialogTitle="@string/settings_list_theme_title"/>
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/settings_category_miscellaneous">
+
         <Preference
             android:key="key_app_version"
             android:title="@string/app_version_title"
@@ -30,6 +42,7 @@
             android:key="key_app_release_type"
             android:title="@string/app_release_type_title"
             android:summary="@string/info_error"/>
+
         <Preference
             android:key="key_app_copyright"
             android:title="@string/app_copyright_title"

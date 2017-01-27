@@ -21,9 +21,9 @@
         android:layout_height="match_parent"
         app:showDuration="600"
         app:hideDuration="200"
-        app:horizontalMargin="30dp"
-        app:verticalMargin="30dp"
-        app:fadeInFraction="0.2"
+        app:horizontalMargin="@dimen/activity_horizontal_margin"
+        app:verticalMargin="@dimen/activity_vertical_margin"
+        app:fadeInFraction="0.3"
         app:fabId="@+id/fabtoolbar_fab"
         app:containerId="@+id/fabtoolbar_container"
         app:fabToolbarId="@+id/fabtoolbar_toolbar">

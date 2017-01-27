@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryLight">#676767</color>
+    <color name="colorPrimary">#2d2d2d</color>
+    <color name="colorPrimaryDark">#161616</color>
+    <color name="colorAccent">#4282ee</color>
+    <color name="colorAccentDark">#3c76d8</color>
+    <color name="colorAccentDarkDark">#3366cc</color>
+
+    <!-- COLORFUL!!!
     <color name="colorPrimaryLight">#CE93D8</color>
     <color name="colorPrimary">#9C27B0</color>
     <color name="colorPrimaryDark">#7B1FA2</color>
     <color name="colorAccent">#00BFA5</color>
     <color name="colorAccentDark">#00BFA5</color>
     <color name="colorAccentDarkDark">#00BFA5</color>
-
-    <!--          BACKUP PIXEL COLORS
-    <color name="colorPrimaryLight">#676767</color>
-    <color name="colorPrimary">#2d2d2d</color>
-    <color name="colorPrimaryDark">#161616</color>
-    <color name="colorAccent">#4282ee</color>
-    <color name="colorAccentDark">#3c76d8</color>
-    <color name="colorAccentDarkDark">#3366cc</color>-->
+    -->
 
     <color name="colorInfoBackground">#273238</color>
     <color name="colorInfoAccent">#69fddb</color>

@@ -2,11 +2,10 @@ package com.zeevox.recorder;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -35,7 +34,12 @@ public class InfoActivity extends Activity {
     public void fabSetup() {
         FloatingActionButton floatingActionButtonDone = (FloatingActionButton) findViewById(R.id.infoFABDone);
         floatingActionButtonDone.setClickable(true);
-        floatingActionButtonDone.setOnClickListener(view -> returnToMain());
+        floatingActionButtonDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnToMain();
+            }
+        });
     }
     public void returnToMain() {
         Intent MainActivityIntent = new Intent(InfoActivity.this, MainActivity.class);
@@ -49,10 +53,18 @@ public class InfoActivity extends Activity {
                 .content(R.string.dialog_info_content)
                 .positiveText(R.string.action_yes)
                 .negativeText(R.string.action_no_thanks)
-                .onPositive((dialog, which) -> returnToMain())
-                .onNegative((dialog, which) -> {
-                    dialog.dismiss();
-                    dialogChooseActivity();
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        returnToMain();
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                        dialogChooseActivity();
+                    }
                 })
                 .show();
     }
@@ -65,19 +77,28 @@ public class InfoActivity extends Activity {
                 .positiveText(R.string.dialog_info_choose_positive)
                 .neutralText(R.string.dialog_info_choose_neutral)
                 .negativeText(R.string.dialog_info_choose_negative)
-                .onPositive((dialog, which) -> {
-                    setContentView(R.layout.activity_info_beta);
-                    fabSetup();
-                    dialog.dismiss();
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        setContentView(R.layout.activity_info_beta);
+                        fabSetup();
+                        dialog.dismiss();
+                    }
                 })
-                .onNeutral((dialog, which) -> {
-                    dialog.dismiss();
-                    returnToMain();
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                        returnToMain();
+                    }
                 })
-                .onNegative((dialog, which) -> {
-                    setContentView(R.layout.activity_info_dogfood);
-                    fabSetup();
-                    dialog.dismiss();
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        setContentView(R.layout.activity_info_dogfood);
+                        fabSetup();
+                        dialog.dismiss();
+                    }
                 })
                 .show();
     }

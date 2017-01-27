@@ -8,6 +8,7 @@ import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -45,24 +46,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FABToolbarLayout layout = (FABToolbarLayout) findViewById(R.id.fabtoolbar);
+        /*if (BuildConfig.BUILD_TYPE == "dogfood" || BuildConfig.BUILD_TYPE == "beta") {
+            Intent infoIntent = new Intent(MainActivity.this, InfoActivity.class);
+            startActivity(infoIntent);
+        }*/
+        final FABToolbarLayout layout = (FABToolbarLayout) findViewById(R.id.fabtoolbar);
         FloatingActionButton fabRecord = (FloatingActionButton) findViewById(R.id.fabtoolbar_fab);
         tutorialFAB();
         ImageView one = (ImageView) findViewById(R.id.one);
-        one.setOnClickListener(view -> layout.hide());
-        ImageView two = (ImageView) findViewById(R.id.two);
-        two.setOnClickListener(view -> layout.hide());
-        ImageView three = (ImageView) findViewById(R.id.three);
-        three.setOnClickListener(view -> {
-            stopRecording();
-            layout.hide();
+        one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layout.hide();
+            }
         });
-        fabRecord.setOnClickListener(view -> {
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED) {
-                startRecording();
-                layout.show();
-            } else {
-                permissionsCheckRecording();
+        ImageView two = (ImageView) findViewById(R.id.two);
+        two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layout.hide();
+            }
+        });
+        ImageView three = (ImageView) findViewById(R.id.three);
+        three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopRecording();
+                layout.hide();
+            }
+        });
+        fabRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED) {
+                    startRecording();
+                    layout.show();
+                } else {
+                    permissionsCheckRecording();
+                }
             }
         });
     }
@@ -163,7 +184,12 @@ public class MainActivity extends AppCompatActivity {
                 new MaterialDialog.Builder(this)
                         .content(R.string.dialog_permissions_record_content)
                         .positiveText(R.string.action_ok)
-                        .onPositive((dialog, which) -> permissionsRequestRecording())
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                permissionsRequestRecording();
+                            }
+                        })
                         .show();
 
             } else {
@@ -192,11 +218,19 @@ public class MainActivity extends AppCompatActivity {
                 .checkBoxPromptRes(R.string.action_dont_ask_again, false, null)
                 .negativeText(R.string.action_no_thanks)
                 .positiveText(R.string.action_ok)
-                .onPositive((dialog, which) -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ezcode.recorder"));
-                    startActivity(intent);
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ezcode.recorder"));
+                        startActivity(intent);
+                    }
                 })
-                .onNegative((dialog, which) -> dialog.dismiss())
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
                 .show();
     }
 
@@ -207,8 +241,18 @@ public class MainActivity extends AppCompatActivity {
                 .content(R.string.dialog_error_recording_content)
                 .negativeText(R.string.action_dismiss)
                 .positiveText(R.string.action_try_again)
-                .onPositive((dialog, which) -> permissionsCheckRecording())
-                .onNegative((dialog, which) -> dialog.dismiss())
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        permissionsCheckRecording();
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
                 .show();
     }
 
@@ -229,68 +273,48 @@ public class MainActivity extends AppCompatActivity {
                 .alwaysCallInputCallback()
                 .inputRangeRes(1, 60, R.color.colorAccent)
                 .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME | InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-                .input("Filename", "", (dialog, input) -> {
-                    //PREVENT NULL FILENAME
-                    if (input.toString().isEmpty()){
-                        dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
-                    } else {
-                        dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+                .input("Enter a filename...", "", new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                        //PREVENT NULL FILENAME
+                        if (input.toString().isEmpty()){
+                            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
+                        } else {
+                            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+                        }
+                        if (input.length()>60) {
+                            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
+                        } else {
+                            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+                        }
+                        name[0] = input.toString();
                     }
-                    if (input.length()>60) {
-                        dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
-                    } else {
-                        dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
-                    }
-                    name[0] = input.toString();
                 })
                 .positiveText(R.string.action_save)
                 .canceledOnTouchOutside(false)
-                .onPositive((dialog, which) -> {
-                    Log.d("Dialog", "positive");
-                    File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings");
-                    directory.mkdirs();
-                    String userInput = name[0];
-                    Log.d("File", userInput);
-                    File temp = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
-                    File dest = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings" + File.separator, userInput + ".3gpp");
-                    temp.renameTo(dest);
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Log.d("Dialog", "positive");
+                        File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings");
+                        directory.mkdirs();
+                        String userInput = name[0];
+                        Log.d("File", userInput);
+                        File temp = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
+                        File dest = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings" + File.separator, userInput + ".3gpp");
+                        temp.renameTo(dest);
+                    }
                 })
                 .negativeText(R.string.action_delete)
-                .onNegative((dialog, which) -> {
-                    Log.d("Dialog", "negative");
-                    //DELETES THE TEMP FILE
-                    File file = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
-                    boolean deleted = file.delete();
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Log.d("Dialog", "negative");
+                        //DELETES THE TEMP FILE
+                        File file = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
+                        boolean deleted = file.delete();
+                    }
                 })
                 .show();
-    }
-
-    public void renameDialog() {
-        final EditText userEditText = new EditText(this);
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH) + 1;
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
-        int second = c.get(Calendar.SECOND);
-        builder.setCancelable(false);
-        builder.setTitle(R.string.dialog_rename_file_title);
-        builder.setMessage(R.string.dialog_rename_file_content);
-        builder.setView(userEditText);
-        builder.setNegativeButton(R.string.action_cancel, (dialogInterface, i) -> {
-            File file = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
-            boolean deleted = file.delete();
-        });
-        builder.setPositiveButton(R.string.action_save, (dialogInterface, i) -> {
-            File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings");
-            directory.mkdirs();
-            String userInput = userEditText.getText().toString();
-            File temp = new File(Environment.getExternalStorageDirectory() + File.separator, "temp.tmp");
-            File dest = new File(Environment.getExternalStorageDirectory() + File.separator + "Recordings" + File.separator, userInput + ".3gpp");
-            temp.renameTo(dest);
-        });
-        builder.show();
     }
 }

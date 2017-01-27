@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.io.File;
@@ -32,7 +35,12 @@ public class SettingsActivity extends PreferenceActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarSettings);
         toolbar.setTitle(R.string.action_settings);
         toolbar.inflateMenu(R.menu.menu_settings);
-        findViewById(R.id.menu_item_settings_close).setOnClickListener(v -> finish());
+        findViewById(R.id.menu_item_settings_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         addPreferencesFromResource(R.xml.preferences_settings_activity);
 
         //SETUP
@@ -83,30 +91,35 @@ public class SettingsActivity extends PreferenceActivity {
             PreferenceCategory lol = (PreferenceCategory) getPreferenceScreen().getPreference(x);
             for(int y = 0; y < lol.getPreferenceCount(); y++){
                 Preference pref = lol.getPreference(y);
-                pref.setOnPreferenceClickListener(preference -> {
-                    String key = preference.getKey();
-                    switch (key) {
-                        case "key_clear_cache":
-                            clearCache();
-                            break;
-                        case "key_join_beta":
-                            dialogBeta();
-                            break;
-                        case "key_app_copyright":
-                            dialogLicenses();
-                            break;
-                        case "key_app_build":
-                            if (buildPress < 7) {
-                                buildPress = buildPress + 1;
-                            } else if (buildPress >= 7) {
-                                buildPress = 0;
-                                Toast.makeText(SettingsActivity.this, "Advanced settings are now enabled. Enjoy!", Toast.LENGTH_SHORT).show();
-                                Intent infoActivityIntent = new Intent(SettingsActivity.this, InfoActivity.class);
-                                startActivity(infoActivityIntent);
-                            }
-                            break;
+                pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        String key = preference.getKey();
+                        switch (key) {
+                            case "key_preference_list_app_theme":
+                                break;
+                            case "key_clear_cache":
+                                clearCache();
+                                break;
+                            case "key_join_beta":
+                                dialogBeta();
+                                break;
+                            case "key_app_copyright":
+                                dialogLicenses();
+                                break;
+                            case "key_app_build":
+                                if (buildPress < 7) {
+                                    buildPress = buildPress + 1;
+                                } else if (buildPress >= 7) {
+                                    buildPress = 0;
+                                    Toast.makeText(SettingsActivity.this, "Advanced settings are now enabled. Enjoy!", Toast.LENGTH_SHORT).show();
+                                    Intent infoActivityIntent = new Intent(SettingsActivity.this, InfoActivity.class);
+                                    startActivity(infoActivityIntent);
+                                }
+                                break;
+                        }
+                        return false;
                     }
-                    return false;
                 });
             }
         }
@@ -161,11 +174,19 @@ public class SettingsActivity extends PreferenceActivity {
                 .content(R.string.dialog_clear_cache_error_text)
                 .positiveText(R.string.action_yes)
                 .negativeText(R.string.action_no_thanks)
-                .onPositive((dialog, which) -> {
-                    dialog.dismiss();
-                    clearCache();
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                        clearCache();
+                    }
                 })
-                .onNegative((dialog, which) -> dialog.dismiss())
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
                 .show();
     }
 
@@ -191,11 +212,19 @@ public class SettingsActivity extends PreferenceActivity {
                 .iconRes(R.drawable.bug)
                 .negativeText(R.string.action_no_thanks)
                 .positiveText(R.string.action_yeah_sure)
-                .onPositive((dialog, which) -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ezcode.recorder"));
-                    startActivity(intent);
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ezcode.recorder"));
+                        startActivity(intent);
+                    }
                 })
-                .onNegative((dialog, which) -> dialog.dismiss())
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
                 .show();
     }
 }

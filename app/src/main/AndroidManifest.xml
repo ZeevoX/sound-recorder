@@ -14,18 +14,13 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreenActivity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppThemeSplash">
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_title"
@@ -41,7 +36,7 @@
             android:name=".HelpActivity"
             android:label="@string/title_activity_help"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".InfoActivity"
             android:theme="@style/AppThemeInfo" />

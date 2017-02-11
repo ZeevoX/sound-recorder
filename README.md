@@ -8,7 +8,7 @@ Sound Recorder by ZeevoX is a simple and smooth application that applies all of 
 
 ## Install
 
-This application is not yet available on Google Play. Please use the [other install options.](#otherinstalloptions)
+These personal Sound Recorder builds are not available on Google Play. Please use the [other install options.](#otherinstalloptions)
 
 <!--##### Stable releases:
 
@@ -55,7 +55,9 @@ Please do report any bugs you find on [the issues page.](https://github.com/Zeev
 ```
 MIT License
 
-Copyright (c) 2016-2017 Timothy Langer (ZeevoX)
+Open Source Copyright (c) 2016-2017 EAZY Code
+
+This modified code, derivative of the original EAZY Code code, is maintained by ZeevoX who holds equal Open Source rights.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
